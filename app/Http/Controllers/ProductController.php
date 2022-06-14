@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Store;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -147,6 +148,7 @@ class ProductController extends Controller
                
         $product->status = 'TemporalSale';
         $product->amount = $request->get('amount');
+        $product->total = $request->get('amount') * $product->price ;
 
         $product->save();
         return redirect('/products');   
@@ -170,6 +172,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrfail($id);
         $product->amount = $product->amount + 1;
+        $product->total = $product->amount * $product->price;
 
         $product->save();
 
@@ -181,6 +184,7 @@ class ProductController extends Controller
         $product = Product::findOrfail($id);
 
         $product->amount = $product->amount - 1;
+        $product->total = $product->amount * $product->price;
 
         $product->save();
 
@@ -199,20 +203,30 @@ class ProductController extends Controller
     }
 
 
-    public function buyconfirm(Request $request, $id)
+    public function buyconfirm(Request $request)
     {
-        $validData = $request->validate([
-            'amount' => 'min:1',
-        ]);
+        $Store = Store::findOrfail($request->store_id);
 
-        $product = Product::findOrfail($id);
+        $Product = Product::Where('status', 'TemporalSale')->get();
 
+        foreach ($Product as $Product) 
+        {
+            DB::table('productspyments')
+            ->insert([
+                'productId' => $Product->id,
+                'storeId' => $Store->id,
+                'amount' => $Product->amount,
+                'unitprice' => $Product->price
+            ]);
+
+            Product::findOrfail($Product->id)->update(['status' => 'Comprado', 'stock' => $Product->stock - $Product->amount]);
+
+        }
+
+        return redirect()->route('dashboard');
         
-        return view('Products.buyconfirm', [
-            'Product' => Product::where('status', 'TemporalSale')->get()
-        ],
-        );
     }
+
     
 
 }

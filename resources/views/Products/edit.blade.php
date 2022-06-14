@@ -25,7 +25,7 @@
         </div>
         <div class="form-group mt-3">
             <label class="text-primary">SKU</label>
-            <input type="text" name="SKU" id="SKU" class="form-control text-center" value="{{ $product->SKU }}" value="{{ old('SKU') }}">
+            <input type="number" name="SKU" id="SKU" class="form-control text-center" value="{{ $product->SKU }}" value="{{ old('SKU') }}">
         </div>
         <div class="form-group mt-3">
             <label class="text-primary">Descripción</label>
@@ -33,11 +33,11 @@
         </div>
         <div class="form-group mt-3">
             <label class="text-primary">Precio</label>
-            <input type="text" name="price" id="price" class="form-control text-center" value="{{ $product->price }}" value="{{ old('price') }}">
+            <input type="number" name="price" id="price" class="form-control text-center" value="{{ $product->price }}" value="{{ old('price') }}">
         </div>
         <div class="form-group mt-3">
             <label class="text-primary">Stock</label>
-            <input type="text" name="stock" id="stock" class="form-control text-center" value="{{ $product->stock }}" value="{{ old('stock') }}">
+            <input type="number" name="stock" id="stock" class="form-control text-center" value="{{ $product->stock }}" value="{{ old('stock') }}">
         </div>
         <button type="submit" class="btn btn-outline-primary mt-3"><i class="fa-solid fa-floppy-disk"></i> Actualizar</button>
         <a class="btn btn-outline-secondary mt-3" href="/products"><i class="fa-solid fa-rotate-left"></i> Regresar</a>

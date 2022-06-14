@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 
+    [DashboardController::class, 'index']
+);
 
 
 Route::resource('/products', ProductController::class);
@@ -26,11 +28,13 @@ Route::put('/products/{id}/temporalsale', 'App\Http\Controllers\ProductControlle
 Route::put('/products/{id}/temporalsale/down', 'App\Http\Controllers\ProductController@temporalsaledown');
 Route::put('/products/{id}/temporal/plus', [ProductController::class, 'temporalplus']);
 Route::put('/products/{id}/temporal/minus', [ProductController::class, 'temporalminus']);
-Route::get('/products/{id}/buyconfirm', [ProductController::class, 'buyconfirm']);
+Route::post('/products/buy/confirm', [ProductController::class, 'buyconfirm'])->name('buyconfirm');
 Route::get('/products/shopping/car', [ProductController::class,'shopping'])->name('shopping');
 
 
 Route::get('/stores', [StoreController::class, 'index']);
 
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 

@@ -2,12 +2,12 @@
 
 @section('content')
 <div>
-    <form action="/products/buy/confirm" class="container">
+    <form action="{{ route('buyconfirm') }}" class="container" method="POST">
         @csrf
-        <a href="/products/buyconfirm" class="btn btn-outline-primary mt-3"><i class="fa-solid fa-bag-shopping"></i> Comprar</a>
+        <button type="submit" class="btn btn-outline-primary mt-3"><i class="fa-solid fa-bag-shopping"></i> Confirmar y Comprar</button>
         <a class="btn btn-outline-secondary mt-3" href="/products"><i class="fa-solid fa-rotate-left"></i> Regresar</a>
-        <select name="store_id" id="store" class="form-control mt-2">
-                <option value="">-Selecciona una tienda-</option>
+        <select name="store_id" id="store" class="form-control mt-3" required>
+                <option value="">--Selecciona una tienda--</option>
             @foreach( $Store as $Store )
                 <option value="{{ $Store->id }}">{{ $Store->name }}</option>
             @endforeach
@@ -24,6 +24,7 @@
             <th></th>
             <th>Cantidad</th>
             <th></th>
+            <th>Total</th>
             <th></th>
         </tr>
 
@@ -32,7 +33,7 @@
             <td> {{ $Product->name }} </td>
             <td> {{ $Product->SKU }} </td>
             <td> {{ $Product->description }} </td>
-            <td> {{ $Product->price }} </td>
+            <td> $ {{ number_format($Product->price) }} </td>
             <td>
                 <form action="/products/{{ $Product->id }}/temporal/minus" method="POST">
                 @csrf
@@ -40,13 +41,16 @@
                 <button type="submit" class="btn btn-outline-secondary"><i class="fa-solid fa-minus"></i></button>                    
                 </form>
             </td>
-            <td> {{ $Product->amount }}</td>
+            <td>{{ $Product->amount }}</td>
             <td>
                 <form action="/products/{{ $Product->id }}/temporal/plus" method="POST">
                 @csrf
                 @method('put')
                 <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></button>                    
                 </form>
+            </td>
+            <td>
+                $ {{ number_format($Product->total) }}
             </td>
             <td>
                 <form action="/products/{{ $Product->id }}/temporalsale/down" method="POST">
