@@ -27,6 +27,10 @@ Route::put('/products/{id}/temporalsale', 'App\Http\Controllers\ProductControlle
 
 Route::put('/products/{id}/temporalsale/down', 'App\Http\Controllers\ProductController@temporalsaledown');
 
+Route::put('/products/{id}/temporal/plus', [ProductController::class, 'temporalplus']);
+Route::put('/products/{id}/temporal/minus', [ProductController::class, 'temporalminus']);
 
-Route::get('/products/buy/confirm', [ProductController::class, 'buyconfirm'])->name('buyconfirm');
+
+
+Route::get('/products/{id}/buyconfirm', [ProductController::class, 'buyconfirm']);
 Route::get('/products/shopping/car', [ProductController::class,'shopping'])->name('shopping');

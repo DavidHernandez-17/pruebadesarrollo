@@ -135,20 +135,51 @@ class ProductController extends Controller
     }
 
 
-    public function temporalSale($id, Request $request)
+    //Cambia el Estado del producto a TemporalSale y adiciona cantidad de producto
+    public function temporalSale(Request $request, $id)
     {
+        $validData = $request->validate([
+            'amount' => 'min:1',
+        ]);
+
         $product = Product::findOrfail($id);
+               
         $product->status = 'TemporalSale';
+        $product->amount = $request->get('amount');
 
         $product->save();
+        return redirect('/products');   
+        
 
-        return redirect('/products');
     }
 
+
+    //Elimina producto de carrito de compras
     public function temporalSaleDown($id)
     {
         $product = Product::findOrfail($id);
         $product->status = 'Disponible';
+
+        $product->save();
+
+        return redirect('/products/shopping/car');
+    }
+
+    public function temporalPlus($id)
+    {
+        $product = Product::findOrfail($id);
+        $product->amount = $product->amount + 1;
+
+        $product->save();
+
+        return redirect('/products/shopping/car');
+    }
+
+    public function temporalMinus($id)
+    {
+        $product = Product::findOrfail($id);
+        
+        $product->amount = $product->amount - 1;
 
         $product->save();
 
@@ -163,9 +194,19 @@ class ProductController extends Controller
     );
     }
 
-    public function buyconfirm()
+    public function buyconfirm(Request $request, $id)
     {
-        return view('Products.buyconfirm');
+        $validData = $request->validate([
+            'amount' => 'min:1',
+        ]);
+
+        $product = Product::findOrfail($id);
+
+        
+        return view('Products.buyconfirm', [
+            'Product' => Product::where('status', 'TemporalSale')->get()
+        ],
+        );
     }
     
 }

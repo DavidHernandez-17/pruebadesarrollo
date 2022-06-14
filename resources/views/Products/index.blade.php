@@ -6,6 +6,15 @@
         <a class="btn btn-outline-primary mt-3" href="/products/create"><i class="fa-solid fa-circle-plus"></i> Crear producto</a>
         <a class="btn btn-outline-success mt-3" href="{{ route('shopping') }}"><i class="fa-solid fa-cart-plus"></i> Ver carrito</a>
     </div>
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <table class="table table-striped mt-3 table-bordered text-center container">
         <th colspan="12" class="text-center">Productos</th>
         <tr>
@@ -25,14 +34,16 @@
             <td> {{ $Product->description }} </td>
             <td> {{ $Product->price }} </td>
             <td> {{ $Product->stock }} </td>
-            <td> <input type="number" value="1" class="text-center form-control"></td>
             <td> 
                 <form action="/products/{{ $Product->id }}/temporalsale" method="POST">
                 @csrf
                 @method('put')
-                    <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-circle-plus mb-2"></i></button>
+                    <input type="number" value="1" value="{{ old('amount') }}" class="text-center form-control" name="amount" id="amount">
+                <td>   
+                    <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-circle-plus mb-2"></i></button>     
                     <a class="btn btn-outline-secondary" href="/products/{{ $Product->id }}/edit"><i class="fa-solid fa-pen-to-square"></i></a>
                     <a class="btn btn-outline-danger" href="/products/{{ $Product->id }}/confirmDelete"><i class="fa-solid fa-circle-minus"></i></a>
+                </td>    
                 </form>
             </td>
         </tr>
