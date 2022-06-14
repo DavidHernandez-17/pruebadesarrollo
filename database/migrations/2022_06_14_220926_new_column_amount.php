@@ -14,7 +14,7 @@ class NewColumnAmount extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->integer('amount');
+            $table->integer('amount')->default(0);
         });
     }
 

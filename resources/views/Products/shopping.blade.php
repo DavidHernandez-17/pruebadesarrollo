@@ -4,17 +4,17 @@
 <div>
     <form action="{{ route('buyconfirm') }}" class="container" method="POST">
         @csrf
-        <button type="submit" class="btn btn-outline-primary mt-3"><i class="fa-solid fa-bag-shopping"></i> Confirmar y Comprar</button>
-        <a class="btn btn-outline-secondary mt-3" href="/products"><i class="fa-solid fa-rotate-left"></i> Regresar</a>
         <select name="store_id" id="store" class="form-control mt-3" required>
-                <option value="">--Selecciona una tienda--</option>
+                <option value="">--Selecciona tienda destino--</option>
             @foreach( $Store as $Store )
                 <option value="{{ $Store->id }}">{{ $Store->name }}</option>
             @endforeach
         </select>
+        <button type="submit" class="btn btn-outline-primary mt-3"><i class="fa-solid fa-bag-shopping"></i> Confirmar y Comprar</button>
+        <a class="btn btn-outline-secondary mt-3" href="/products"><i class="fa-solid fa-rotate-left"></i> Regresar</a>
     </form>
         
-    <table class="table table-striped mt-3 table-bordered text-center container">
+    <table class="table table-striped mt-3 table-bordered text-center container" style="scroll-behavior:smooth">
         <th colspan="12" class="text-center"><i class="fa-solid fa-cart-plus"></i> Carrito de compras</th>
         <tr>
             <th>Nombre</th>

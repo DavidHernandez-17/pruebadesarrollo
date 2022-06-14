@@ -14,7 +14,7 @@ class NewColumnPrice extends Migration
     public function up()
     {
         Schema::table('productspyments', function (Blueprint $table) {
-            $table->integer('unitprice');
+            $table->integer('unitprice')->default(0);
         });
     }
 
