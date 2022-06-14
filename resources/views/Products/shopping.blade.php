@@ -6,7 +6,12 @@
         @csrf
         <a href="/products/buyconfirm" class="btn btn-outline-primary mt-3"><i class="fa-solid fa-bag-shopping"></i> Comprar</a>
         <a class="btn btn-outline-secondary mt-3" href="/products"><i class="fa-solid fa-rotate-left"></i> Regresar</a>
-        <input type="number" class="form-control mt-2" placeholder="Código tienda">
+        <select name="store_id" id="store" class="form-control mt-2">
+                <option value="">-Selecciona una tienda-</option>
+            @foreach( $Store as $Store )
+                <option value="{{ $Store->id }}">{{ $Store->name }}</option>
+            @endforeach
+        </select>
     </form>
         
     <table class="table table-striped mt-3 table-bordered text-center container">

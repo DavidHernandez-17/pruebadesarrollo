@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Store;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
@@ -191,6 +192,9 @@ class ProductController extends Controller
         return view('Products.shopping', [
             'Product' => Product::where('status', 'TemporalSale')->get()
         ],
+        [
+            'Store' => Store::all()
+        ]
     );
     }
 
