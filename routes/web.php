@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,17 +21,16 @@ Route::get('/', function () {
 
 
 Route::resource('/products', ProductController::class);
-
 Route::get('/products/{id}/confirmDelete', 'App\Http\Controllers\ProductController@confirmDelete');
-
 Route::put('/products/{id}/temporalsale', 'App\Http\Controllers\ProductController@temporalsale');
-
 Route::put('/products/{id}/temporalsale/down', 'App\Http\Controllers\ProductController@temporalsaledown');
-
 Route::put('/products/{id}/temporal/plus', [ProductController::class, 'temporalplus']);
 Route::put('/products/{id}/temporal/minus', [ProductController::class, 'temporalminus']);
-
-
-
 Route::get('/products/{id}/buyconfirm', [ProductController::class, 'buyconfirm']);
 Route::get('/products/shopping/car', [ProductController::class,'shopping'])->name('shopping');
+
+
+Route::get('/stores', [StoreController::class, 'index']);
+
+
+

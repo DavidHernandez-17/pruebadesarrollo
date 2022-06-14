@@ -178,7 +178,7 @@ class ProductController extends Controller
     public function temporalMinus($id)
     {
         $product = Product::findOrfail($id);
-        
+
         $product->amount = $product->amount - 1;
 
         $product->save();
@@ -193,6 +193,7 @@ class ProductController extends Controller
         ],
     );
     }
+
 
     public function buyconfirm(Request $request, $id)
     {
@@ -209,4 +210,5 @@ class ProductController extends Controller
         );
     }
     
+
 }

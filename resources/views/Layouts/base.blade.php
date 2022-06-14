@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse nav justify-content-center" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="/products"><i class="fa-solid fa-tags"></i> Productos</a>
-                        <a class="nav-link active" href="#"><i class="fa-solid fa-shop"></i> Tiendas</a>
+                        <a class="nav-link active" href="/stores"><i class="fa-solid fa-shop"></i> Tiendas</a>
                         <a class="nav-link active"><i class="fa-solid fa-truck-arrow-right"></i> Despachados</a>
                     </div>
                 </div>
