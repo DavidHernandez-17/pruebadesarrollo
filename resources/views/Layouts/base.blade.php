@@ -22,7 +22,7 @@
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="/products"><i class="fa-solid fa-tags"></i> Productos y compras</a>
                         <a class="nav-link active" href="/stores"><i class="fa-solid fa-shop"></i> Tiendas</a>
-                        <a class="nav-link active" href="/" ><i class="fa-solid fa-truck-arrow-right"></i> Compras</a>
+                        <a class="nav-link active" href="/" ><i class="fa-solid fa-truck-arrow-right"></i> Despachado</a>
                     </div>
                 </div>
             </div>

@@ -43,7 +43,7 @@ class ProductController extends Controller
     {
         $validData = $request->validate([
             'name' => 'required|min:3',
-            'SKU' => 'required',
+            'SKU' => 'required|unique:products,SKU'.$request->id,
             'description' => 'required|min:3',
             'price' => 'required',
             'stock' => 'required',
@@ -193,12 +193,20 @@ class ProductController extends Controller
 
     public function shopping()
     {
+        $product = Product::where('status', 'TemporalSale')->get();
+        $sum = 0;
+        foreach ($product as $product) {
+            $sum += $product->total;
+        }
+
+
         return view('Products.shopping', [
-            'Product' => Product::where('status', 'TemporalSale')->get()
+            'Product' => Product::where('status', 'TemporalSale')->get(),
+            'Sum' => $sum
         ],
         [
             'Store' => Store::all()
-        ]
+        ],
     );
     }
 

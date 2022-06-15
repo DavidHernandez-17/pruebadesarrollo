@@ -25,7 +25,7 @@
         </div>
         <div class="form-group mt-3">
             <label class="text-primary">SKU</label>
-            <input type="number" name="SKU" id="SKU" class="form-control text-center" value="{{ $product->SKU }}" value="{{ old('SKU') }}">
+            <input type="number" readonly name="SKU" id="SKU" class="form-control text-center" value="{{ $product->SKU }}" value="{{ old('SKU') }}">
         </div>
         <div class="form-group mt-3">
             <label class="text-primary">Descripción</label>

@@ -18,12 +18,18 @@ class DashboardController extends Controller
         ->Where('stores.id', $request->store_id)
         ->get();
 
+        $sum = 0;
+        foreach ($productspyments as $Product) {
+            $sum += $Product->pymentsamount * $Product->unitprice;
+        }
+
         $Stores = Store::all();
 
         return view('Dashboard.index', [
             'Stores' => $Stores,
             'ProductPyments' => $productspyments,
-            'selectedstore_id' => $request->store_id
+            'selectedstore_id' => $request->store_id,
+            'Sum' => $sum
         ]);
     }
 

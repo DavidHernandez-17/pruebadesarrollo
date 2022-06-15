@@ -12,6 +12,12 @@
         </select>
         <button type="submit" class="btn btn-outline-primary mt-3"><i class="fa-solid fa-bag-shopping"></i> Confirmar y Comprar</button>
         <a class="btn btn-outline-secondary mt-3" href="/products"><i class="fa-solid fa-rotate-left"></i> Regresar</a>
+
+        <div class="mt-2">
+            <strong>Total carrito: </strong>
+            <h4 class="text-success">$ {{ number_format($Sum) }}</h4>
+        </div>
+        
     </form>
         
     <table class="table table-striped mt-3 table-bordered text-center container" style="scroll-behavior:smooth">
@@ -41,7 +47,9 @@
                 <button type="submit" class="btn btn-outline-secondary"><i class="fa-solid fa-minus"></i></button>                    
                 </form>
             </td>
+
             <td>{{ $Product->amount }}</td>
+
             <td>
                 <form action="/products/{{ $Product->id }}/temporal/plus" method="POST">
                 @csrf

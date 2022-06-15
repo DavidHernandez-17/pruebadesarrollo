@@ -16,6 +16,12 @@
             @endforeach
         </select>
         <button type="submit" class="btn btn-outline-primary mt-3"> Filtrar</button>
+        
+        <div class="mt-2">
+            <strong>Total compras: </strong>
+            <h4 class="text-success">$ {{ number_format($Sum) }}</h6>
+        </div>
+
     </form>
     
     @if( count($ProductPyments) > 0 )   
